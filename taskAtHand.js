@@ -1,7 +1,7 @@
 "use strict";
 
 function TaskAtHandApp() {
-    var version = "v1.1";
+    var version = "v1.3";
 
     function setStatus(message) {
         $("#app > footer").text(message);
