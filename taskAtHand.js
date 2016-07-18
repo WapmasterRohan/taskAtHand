@@ -17,23 +17,18 @@ function TaskAtHandApp() {
     }
 
     function addTaskElement(taskName) {
-        var $task = $("<li></li>");
-        var $deleteTask = $("<button class='delete'>X</button>");
-        var $moveUp = $("<button class='move-up'>^</button>");
-        var $moveDown = $("<button class='move-up'>v</button>");
-        // $task.text(taskName);
-        // $("#task-list").append($task);
-        $task.append($deleteTask)
-            .append($moveUp)
-            .append($moveDown)
-            .append("<span class='task-name'>" + taskName + "</span>");
-        $deleteTask.click(function() {
+        var $task = $("#task-template .task").clone();
+        $("span.task-name", $task).text(taskName);
+
+        $("#task-list").append($task);
+
+        $("button.delete", $task).click(function() {
             $task.remove();
         });
-        $moveUp.click(function() {
+        $("button.move-up", $task).click(function() {
             $task.insertBefore($task.prev());
         });
-        $moveDown.click(function() {
+        $("button.move-down", $task).click(function() {
             $task.insertAfter($task.next());
         });
     }
