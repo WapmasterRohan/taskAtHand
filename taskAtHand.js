@@ -2,7 +2,7 @@
 
 function TaskAtHandApp() {
     var version = "v1.3";
-    appStorage = new appStorage("taskAtHand");
+    appStorage = new AppStorage("taskAtHand");
 
     function setStatus(message) {
         $("#app > footer").text(message);
@@ -14,6 +14,7 @@ function TaskAtHandApp() {
             addTaskElement(taskName);
             // Reset the text field
             $("#new-task-name").val("").focus();
+            saveTaskList();
         }
     }
 
@@ -60,6 +61,7 @@ function TaskAtHandApp() {
         var $span = $input.siblings("span.task-name");
         if($input.val()) {
             $span.text($input.val());
+            saveTaskList();
         }
         $span.show();
     }
@@ -74,7 +76,7 @@ function TaskAtHandApp() {
             $task.insertBefore($task.prev());
         }
         else {
-            $task.insertAfter($task, next());
+            $task.insertAfter($task.next());
         }
 
         saveTaskList();
@@ -88,6 +90,16 @@ function TaskAtHandApp() {
         appStorage.setValue("taskList", tasks);
     }
 
+    function loadTaskList() {
+        var tasks = appStorage.getValue("taskList");
+
+        if(tasks) {
+            for(var i in tasks) {
+                addTaskElement(tasks[i]);
+            }
+        }
+    }
+
     this.start = function() {
         $("#new-task-name").keypress(function(e) {
             if(e.which == 13) { // Enter key
@@ -98,6 +110,7 @@ function TaskAtHandApp() {
         .focus();
 
         $("#app > header").append(version);
+        loadTaskList();
         setStatus("ready");
     };
 }
