@@ -35,6 +35,24 @@ button {
     margin: 1em;
 }
 
+#add-task lebel {
+    display: block;
+    font-weight: bold;
+}
+#new-task-name {
+    font-size: 1em;
+    display: block;
+    width: 15em;
+}
+#task-list {
+    padding: 0;
+}
+#task-list li {
+    list-style: none;
+    padding: 0.25em;
+    margin: 0.25em;
+}
+
 #task-list .task .tools {
     display: inline-block;
 }
