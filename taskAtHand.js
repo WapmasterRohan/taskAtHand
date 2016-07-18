@@ -17,7 +17,7 @@ function TaskAtHandApp() {
     }
 
     function addTaskElement(taskName) {
-        var $task = $("<li.</li>");
+        var $task = $("<li></li>");
         $task.text(taskName);
         $("#task-list").append($task);
     }
