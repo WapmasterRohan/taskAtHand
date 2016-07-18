@@ -1,7 +1,7 @@
 "use strict";
 
 function TaskAtHandApp() {
-    var version = "v1.0";
+    var version = "v1.1";
 
     function setStatus(message) {
         $("#app > footer").text(message);
@@ -18,12 +18,28 @@ function TaskAtHandApp() {
 
     function addTaskElement(taskName) {
         var $task = $("<li></li>");
-        $task.text(taskName);
-        $("#task-list").append($task);
+        var $deleteTask = $("<button class='delete'>X</button>");
+        var $moveUp = $("<button class='move-up'>^</button>");
+        var $moveDown = $("<button class='move-up'>v</button>");
+        // $task.text(taskName);
+        // $("#task-list").append($task);
+        $task.append($deleteTask)
+            .append($moveUp)
+            .append($moveDown)
+            .append("<span class='task-name'>" + taskName + "</span>");
+        $deleteTask.click(function() {
+            $task.remove();
+        });
+        $moveUp.click(function() {
+            $task.insertBefore($task.prev());
+        });
+        $moveDown.click(function() {
+            $task.insertAfter($task.next());
+        });
     }
 
     this.start = function() {
-        $("#new-task-name").keypress(function() {
+        $("#new-task-name").keypress(function(e) {
             if(e.which == 13) { // Enter key
                 addTask();
                 return false;
